@@ -338,6 +338,9 @@ p:nth-child(2) {
 
 	.inside header #breadcrumb {
 		width: 100%;
+		text-align: center;
+		padding-right: 0;
+		padding-left: 0;
 	}
 
 	.inside #map-container {
