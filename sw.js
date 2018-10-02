@@ -1,8 +1,11 @@
 /**
- * Cache URLs in cache named 'rr-static-v1'
+ * Cache URLs
  */
 
+var staticCacheName = 'rr-static-v1';
+
 self.addEventListener('install', function(event) {
+  console.log("Service Worker installed");
   var urlsToCache = [
     '/',
     'index.html',
@@ -25,8 +28,31 @@ self.addEventListener('install', function(event) {
   ];
 
   event.waitUntil(
-    caches.open('rr-static-v1').then(function(cache) {
+    caches.open(staticCacheName).then(function(cache) {
+      console.log('Service Worker caching', urlsToCache);
       return cache.addAll(urlsToCache);
+    })
+  );
+});
+
+/**
+ * Compare the cache names - if they are not equal, delete
+ * the old caches
+ */
+
+self.addEventListener('activate', function(event) {
+  console.log("Service Worker activated");
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.filter(function(cacheName) {
+          return cacheName.startsWith('rr-') &&
+              cacheName != staticCacheName;
+        }).map(function(cacheName) {
+          console.log('Service Worker remowing cached files from', cacheName);
+          return cache.delete(cacheName);
+        })
+      );
     })
   );
 });
@@ -36,9 +62,13 @@ self.addEventListener('install', function(event) {
  */
 
  self.addEventListener('fetch', function(event) {
+   console.log('Service Worker fetching', event.request.url);
    event.respondWith(
      caches.match(event.request).then(function(response) {
-       if (response) return response;
+       if (response) {
+         console.log('Service Worker found in cache', event.request.url);
+         return response;
+       }
        return fetch(event.request);
      })
    );
