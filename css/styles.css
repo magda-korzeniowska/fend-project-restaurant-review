@@ -22,8 +22,7 @@ a {
 	text-decoration: none;
 }
 a:hover, a:focus {
-	/* color: #3397db; */
-	color: #fff;
+	color: #3397db;
 	text-decoration: none;
 }
 a img{
@@ -202,6 +201,11 @@ nav h1 a {
 }
 
 /* ====================== Restaurant Details ====================== */
+.inside #maincontent {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+}
 .inside header {
   position: fixed;
   top: 0;
@@ -225,6 +229,12 @@ nav h1 a {
   bottom: 0;
   position: absolute;
   width: 50%;
+}
+.inside #restaurant-review-container {
+  width: 50%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 #restaurant-name {
   color: #e60000;
@@ -260,12 +270,14 @@ nav h1 a {
   border-top: 1px solid #fff;
 }
 #restaurant-container {
-	padding: 140px 40px 30px;
-  width: 42%;
+	padding: 140px 0 30px;
+	width: 85%;
+	box-sizing: border-box;
 }
 #reviews-container {
-  padding: 30px 40px 80px;
-	width: 44%;
+  padding: 30px 0 60px;
+	width: 85%;
+	box-sizing: border-box;
 }
 #reviews-container h2 {
   color: #e60000;
@@ -288,7 +300,6 @@ nav h1 a {
   overflow: hidden;
   padding: 20px;
   position: relative;
-  width: 85%;
 	text-align: justify;
 }
 #reviews-list li p {
@@ -322,11 +333,6 @@ p:nth-child(2) {
 /* ====================== MEDIA QUERIES ====================== */
 
 @media screen and (max-width: 700px) {
-	.inside {
-		display: flex;
-		flex-direction: column;
-	}
-
 	.inside nav {
 		width: 100%;
 	}
@@ -350,17 +356,12 @@ p:nth-child(2) {
 		top: 130px;
 	}
 
-	#restaurant-container {
-		width: 100%;
-		margin: auto;
-		padding: 450px 0 0 0;
+	.inside #restaurant-review-container {
+	  width: 100%;
 	}
 
-	#restaurant-img,
-	#restaurant-cuisine {
-		width: 100%;
-		margin: 0;
-		padding: 0;
+	#restaurant-container {
+		padding: 450px 0 30px;
 	}
 
 	#restaurant-name {
@@ -372,18 +373,8 @@ p:nth-child(2) {
 		padding: 0 0 0 30px;
 	}
 
-	#reviews-container {
-		width: 100%;
-		margin: 0;
-		padding: 30px 0 80px 0;
-	}
-
 	#reviews-container h2 {
 		text-align: center;
-	}
-
-	#reviews-list {
-		padding: 0 0 0 30px;
 	}
 
 	.inside #footer {
